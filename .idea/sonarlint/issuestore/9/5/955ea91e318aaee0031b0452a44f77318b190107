@@ -1,0 +1,13 @@
+
+\"squid:SwitchLastCaseIsDefaultCheckB""Add a default case to this switch.(×“¾ñùÿÿÿÿ8µÎä”í-
+Gsquid:S1659"$Declare "btnGet" on a separate line.(ããÅòùÿÿÿÿ8µÎä”í-
+Msquid:S1068"/Remove this unused "myComponent" private field.(äĞ–Å8µÎä”í-
+lsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(ÄÇ‚·8µÎä”í-
+Jsquid:S16022",Remove useless curly braces around statement(Ø×ı™8ßüä”í-
+nsquid:S1301B"KReplace this "switch" statement by "if" statements to increase readability.(×“¾ñùÿÿÿÿ8µÎä”í-
+V
+squid:S1064"9Replace this use of System.out or System.err by a logger.( ò±8µÎä”í-
+[
+squid:S1063"9Replace this use of System.out or System.err by a logger.(ÕÙ¢Àúÿÿÿÿ8ßüä”í-
+nsquid:CommentedOutCodeLine*"<This block of commented-out lines of code should be removed.(ĞÖ´şÿÿÿÿ8µÎä”í-
+Dsquid:S1659"&Declare "inNumber" on a separate line.(Œğ”À8µÎä”í-
