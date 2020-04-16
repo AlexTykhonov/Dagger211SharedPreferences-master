@@ -1,6 +1,6 @@
 package com.journaldev.dagger2.Module;
 
-import com.journaldev.dagger2.MainActivity;
+import com.journaldev.dagger2.login.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

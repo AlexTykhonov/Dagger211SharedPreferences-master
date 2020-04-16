@@ -3,7 +3,6 @@ package com.journaldev.dagger2.Component;
 import android.app.Application;
 
 import com.journaldev.dagger2.App;
-import com.journaldev.dagger2.MainActivity;
 import com.journaldev.dagger2.Module.MainActivityModule;
 import com.journaldev.dagger2.Module.SharedPrefModule;
 

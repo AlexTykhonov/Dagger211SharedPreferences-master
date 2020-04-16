@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name = "login"
+            type= "com.journaldev.dagger2.login.LoginViewModel"
+            />
+    </data>
+
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.journaldev.dagger2.MainActivity">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/inUsername"
@@ -43,3 +50,4 @@
         android:layout_alignEnd="@+id/inNumber" />
 
 </RelativeLayout>
+</layout>
