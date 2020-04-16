@@ -1,11 +1,7 @@
-package com.journaldev.dagger2;
+package com.journaldev.dagger2.network;
 
 
-import android.content.SharedPreferences;
-
-import com.journaldev.Api;
-
-import javax.inject.Inject;
+import com.journaldev.dagger2.network.Api;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;

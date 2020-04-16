@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.journaldev.dagger2.App;
 import com.journaldev.dagger2.Module.MainActivityModule;
+import com.journaldev.dagger2.Module.RetrofitModule;
 import com.journaldev.dagger2.Module.SharedPrefModule;
 
 import javax.inject.Singleton;
@@ -17,7 +18,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 
 @Singleton
-@Component(modules = {AndroidSupportInjectionModule.class, SharedPrefModule.class, MainActivityModule.class})
+@Component(modules = {AndroidSupportInjectionModule.class, SharedPrefModule.class, MainActivityModule.class, RetrofitModule.class})
 //AndroidSupportInjectionModule содержит в себе мультибайндиг коллекций с фабриками для создания сабкомпонентов, которые были сгенерированы с помощью аннотации @ContributesAndroidInjector
 public interface MyComponent {
 

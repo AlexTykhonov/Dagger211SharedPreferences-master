@@ -4,22 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import com.journaldev.Api;
+import com.journaldev.dagger2.network.Api;
 import com.journaldev.dagger2.Component.MyComponent;
-import com.journaldev.dagger2.Controller;
-import com.journaldev.dagger2.Module.SharedPrefModule;
+import com.journaldev.dagger2.network.Controller;
 import com.journaldev.dagger2.R;
 import com.journaldev.dagger2.model.Login;
 import javax.inject.Inject;
 import dagger.android.AndroidInjection;
-import dagger.android.AndroidInjector;
-import dagger.android.HasFragmentInjector;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -35,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Inject
     Controller controller;
 
+    @Inject
+    Api api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         initViews();
-        Api api = controller.createService();
+       // Api api = controller.createService();
         api.login(new Login("Andrew", "password"))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

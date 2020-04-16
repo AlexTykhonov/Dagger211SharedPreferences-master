@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.journaldev.dagger2.Controller;
+import com.journaldev.dagger2.network.Controller;
 
 import javax.inject.Singleton;
 
@@ -30,11 +30,5 @@ public class SharedPrefModule {
     @Provides
     public SharedPreferences provideSharedPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
-    }
-
-    @Singleton
-    @Provides
-    public Controller createController () {
-        return new Controller();
     }
 }

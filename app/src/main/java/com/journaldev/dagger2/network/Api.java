@@ -1,4 +1,4 @@
-package com.journaldev;
+package com.journaldev.dagger2.network;
 
 import com.journaldev.dagger2.model.Login;
 import com.journaldev.dagger2.model.Moto;
