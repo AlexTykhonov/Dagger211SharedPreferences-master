@@ -1,5 +1,9 @@
 package com.journaldev.dagger2.Module;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.content.SharedPreferences;
+
+import com.journaldev.dagger2.login.LoginRepository;
 import com.journaldev.dagger2.network.Api;
 import com.journaldev.dagger2.network.Controller;
 
@@ -21,4 +25,18 @@ public class RetrofitModule {
     public Api createApi (Controller controller) {
        return controller.createService();
     }
+
+
+//    // ADDED
+    @Provides
+    @Singleton
+    LoginRepository getRepository(Api apiCallInterface, SharedPreferences sharedPreferences) {
+        return new LoginRepository(apiCallInterface, sharedPreferences);
+    }
+//
+//    @Provides
+//    @Singleton
+//    ViewModelProvider.Factory getViewModelFactory(LoginRepository myRepository) {
+//        return new ViewModelFactory(myRepository);
+//    }
 }

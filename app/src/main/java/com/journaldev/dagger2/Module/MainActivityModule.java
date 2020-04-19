@@ -1,5 +1,6 @@
 package com.journaldev.dagger2.Module;
 
+import com.journaldev.dagger2.SecondActivity;
 import com.journaldev.dagger2.login.MainActivity;
 
 import dagger.Module;
@@ -12,4 +13,6 @@ public interface MainActivityModule {
     @ContributesAndroidInjector
     abstract MainActivity contributesMainActivity();
 
+    @ContributesAndroidInjector
+    abstract SecondActivity contributesSecondActivity();
 }

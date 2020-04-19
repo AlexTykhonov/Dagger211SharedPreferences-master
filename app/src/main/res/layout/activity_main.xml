@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name = "login"
+            name = "loginviewmodel"
             type= "com.journaldev.dagger2.login.LoginViewModel"
             />
     </data>
@@ -17,17 +17,17 @@
         android:id="@+id/inUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="Username" />
+        android:text = "@={loginviewmodel.email}"
+        android:layout_margin="8dp" />
 
     <EditText
         android:id="@+id/inNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/inUsername"
+        android:text = "@={loginviewmodel.password}"
         android:layout_margin="8dp"
-        android:inputType="number"
-        android:hint="Number" />
+        android:inputType="text" />
 
     <Button
         android:id="@+id/btnSave"
@@ -45,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GET"
+        android:onClick="@{()->loginviewmodel.login()}"
         android:layout_below="@+id/inNumber"
         android:layout_alignRight="@+id/inNumber"
         android:layout_alignEnd="@+id/inNumber" />

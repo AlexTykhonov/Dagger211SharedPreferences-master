@@ -1,7 +1,11 @@
 package com.journaldev.dagger2.login;
 
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.databinding.DataBindingUtil;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +13,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.journaldev.dagger2.Module.ViewModelFactory;
+import com.journaldev.dagger2.databinding.ActivityMainBinding;
 import com.journaldev.dagger2.network.Api;
 import com.journaldev.dagger2.Component.MyComponent;
 import com.journaldev.dagger2.network.Controller;
@@ -26,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MyComponent myComponent;
 
     @Inject
+    ViewModelFactory viewModelFactory;
+
+    @Inject
     SharedPreferences sharedPreferences;
 
     @Inject
@@ -38,16 +48,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+      //  setContentView(R.layout.activity_main);
+
+        ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        LoginViewModel loginViewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel.class);
+        activityMainBinding.setLoginviewmodel(loginViewModel);
 
         initViews();
        // Api api = controller.createService();
-        api.login(new Login("Andrew", "password"))
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    System.out.println("TOKEN -----> "+s);
-                }, e -> System.out.println("     ERROR!!!     " + e+ " &&& "+sharedPreferences.getString("token", "no token")));
+
+//        api.login(new Login("Andrew", "password"))
+//                .subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(s -> {
+//                    System.out.println("TOKEN -----> "+s);
+//                }, e -> System.out.println("     ERROR!!!     " + e+ " &&& "+sharedPreferences.getString("token", "no token")));
 
         //CHECK INTERNET CONNECTION
         ConnectivityManager cm =
