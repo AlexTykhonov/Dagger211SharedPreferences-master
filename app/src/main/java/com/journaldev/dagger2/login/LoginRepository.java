@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.Toast;
 
 import com.journaldev.dagger2.SecondActivity;
 import com.journaldev.dagger2.model.Login;
@@ -33,7 +34,10 @@ public class LoginRepository {
                     editor.apply();
                     System.out.println("=====>>>> "+sharedPreferences.getString("token", "default"));
                     newActivity(view);
-                }, e -> System.out.println("     ERROR!!!     " + e ));
+                }, e -> {
+                    System.out.println("     ERROR!!!     " + e );
+                    Toast.makeText(view.getContext(), "Wrong Credentials!", Toast.LENGTH_LONG).show();
+                });
     }
 
     void newActivity(View view) {

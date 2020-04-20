@@ -8,13 +8,15 @@ import android.view.View;
 
 import com.journaldev.dagger2.model.Login;
 
+import javax.inject.Inject;
+
 public class LoginViewModel extends ViewModel  {
+
 
     public MutableLiveData<String> email = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
     public MutableLiveData<Login> loginMutableLiveData;
     public MutableLiveData<Boolean> check = new MutableLiveData<>();
-
     public MutableLiveData<Login> getLoginMutableLiveData() {
         if (loginMutableLiveData == null) {
             loginMutableLiveData = new MutableLiveData<>();
@@ -24,6 +26,7 @@ public class LoginViewModel extends ViewModel  {
 
     LoginRepository loginRepository;
 
+    @Inject
     public LoginViewModel (LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }

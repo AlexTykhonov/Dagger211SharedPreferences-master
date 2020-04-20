@@ -29,47 +29,23 @@ import dagger.android.AndroidInjection;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    EditText inUsername, inNumber;
-    Button btnSave, btnGet;
-    private MyComponent myComponent;
+public class MainActivity extends AppCompatActivity {
 
     @Inject
     ViewModelFactory viewModelFactory;
 
-    @Inject
-    SharedPreferences sharedPreferences;
-
-    @Inject
-    Controller controller;
-
-    @Inject
-    Api api;
-
-    Boolean trueclick=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        //  setContentView(R.layout.activity_main);
 
+        // Binding two-sides
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         LoginViewModel loginViewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel.class);
         activityMainBinding.setLoginviewmodel(loginViewModel);
 
-        initViews();
-        // Api api = controller.createService();
-
-//        api.login(new Login("Andrew", "password"))
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(s -> {
-//                    System.out.println("TOKEN -----> "+s);
-//                }, e -> System.out.println("     ERROR!!!     " + e+ " &&& "+sharedPreferences.getString("token", "no token")));
-
-        //CHECK INTERNET CONNECTION
+        //Check type of Internet connection
         ConnectivityManager cm =
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -80,47 +56,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         System.out.println("TYPE OF CONNECTION TO INTERNET: " + isMetered);
     }
 
-//    @BindingAdapter({"showMessage"})
-//    public static void runMe(View view, int messageId) {
-//        if (messageId == Consts.START_SOME_ACTIVITY) {
-//            view.getContext().startActivity(new Intent(view.getContext(), SecondActivity.class));
-//        }
-//    }
-
-    public void newIntent (boolean trueclick){
-        if (trueclick==true) {
-        Intent intent = new Intent(this, SecondActivity.class);
-        startActivity(intent);
-        }
-    }
-
-    private void initViews() {
-        btnGet = findViewById(R.id.btnGet);
-        btnSave = findViewById(R.id.btnSave);
-        inUsername = findViewById(R.id.inUsername);
-        inNumber = findViewById(R.id.inNumber);
-        btnSave.setOnClickListener(this);
-        btnGet.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.btnGet:
-                inUsername.setText(sharedPreferences.getString("username", "default"));
-                inNumber.setText(sharedPreferences.getString("number", "12345"));
-                break;
-            case R.id.btnSave:
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("username", inUsername.getText().toString().trim());
-                editor.putString("number", inNumber.getText().toString().trim());
-                editor.apply();
-                break;
-
-        }
-    }
-
 }
-
-//реализовать ввод пассворд и пароль через форму, получить токен и вывести в консоль
