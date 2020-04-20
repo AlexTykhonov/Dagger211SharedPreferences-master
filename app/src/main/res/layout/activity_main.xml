@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GET"
-        android:onClick="@{()->loginviewmodel.login()}"
+        android:onClick="@{(view)->loginviewmodel.login(view)}"
         android:layout_below="@+id/inNumber"
         android:layout_alignRight="@+id/inNumber"
         android:layout_alignEnd="@+id/inNumber" />

@@ -1,6 +1,11 @@
 package com.journaldev.dagger2.login;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.View;
+
+import com.journaldev.dagger2.SecondActivity;
 import com.journaldev.dagger2.model.Login;
 import com.journaldev.dagger2.network.Api;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -9,15 +14,16 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginRepository {
 
     Api api;
-
     SharedPreferences sharedPreferences;
+    MainActivity mainActivity;
+    Boolean check = false;
 
     public LoginRepository(Api api, SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
         this.api = api;
     }
 
-    void apiLogin (Login login) {
+    void apiLogin (Login login, View view) {
         api.login(login)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -26,8 +32,15 @@ public class LoginRepository {
                     editor.putString("token", s.getToken());
                     editor.apply();
                     System.out.println("=====>>>> "+sharedPreferences.getString("token", "default"));
+                    newActivity(view);
                 }, e -> System.out.println("     ERROR!!!     " + e ));
     }
+
+    void newActivity(View view) {
+    Intent intent = new Intent(view.getContext(), SecondActivity.class);
+    view.getContext().startActivity(intent);
+    }
+
 }
 
 // Login("Andrew", "password")

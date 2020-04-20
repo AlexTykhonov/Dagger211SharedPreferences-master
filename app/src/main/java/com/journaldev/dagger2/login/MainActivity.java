@@ -4,7 +4,9 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.journaldev.dagger2.Module.ViewModelFactory;
+import com.journaldev.dagger2.SecondActivity;
 import com.journaldev.dagger2.databinding.ActivityMainBinding;
 import com.journaldev.dagger2.network.Api;
 import com.journaldev.dagger2.Component.MyComponent;
@@ -44,18 +47,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Inject
     Api api;
 
+    Boolean trueclick=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-      //  setContentView(R.layout.activity_main);
+        //  setContentView(R.layout.activity_main);
 
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         LoginViewModel loginViewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel.class);
         activityMainBinding.setLoginviewmodel(loginViewModel);
 
         initViews();
-       // Api api = controller.createService();
+        // Api api = controller.createService();
 
 //        api.login(new Login("Andrew", "password"))
 //                .subscribeOn(Schedulers.newThread())
@@ -66,15 +71,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //CHECK INTERNET CONNECTION
         ConnectivityManager cm =
-                (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         boolean isMetered = cm.isActiveNetworkMetered();
+        System.out.println("YOU ARE CONNECTED TO INTERNET: " + isConnected);
+        System.out.println("TYPE OF CONNECTION TO INTERNET: " + isMetered);
+    }
 
+//    @BindingAdapter({"showMessage"})
+//    public static void runMe(View view, int messageId) {
+//        if (messageId == Consts.START_SOME_ACTIVITY) {
+//            view.getContext().startActivity(new Intent(view.getContext(), SecondActivity.class));
+//        }
+//    }
 
-        System.out.println("YOU ARE CONNECTED TO INTERNET: "+isConnected);
-        System.out.println("TYPE OF CONNECTION TO INTERNET: "+isMetered);
+    public void newIntent (boolean trueclick){
+        if (trueclick==true) {
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
+        }
     }
 
     private void initViews() {
