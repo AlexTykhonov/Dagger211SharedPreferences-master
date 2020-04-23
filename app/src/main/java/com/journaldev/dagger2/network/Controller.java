@@ -1,7 +1,11 @@
 package com.journaldev.dagger2.network;
 
 
+import android.content.SharedPreferences;
+
 import com.journaldev.dagger2.network.Api;
+
+import javax.inject.Inject;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -11,14 +15,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Controller {
 
     Interceptor headerInterceptor;
-
     public Controller(Interceptor headerInterceptor) {
         this.headerInterceptor = headerInterceptor;
     }
 
-    public Controller() { }
+    //public Controller() { }
 
     final String BASE_URL = "https://fluxjwt.herokuapp.com/";
+
     private  OkHttpClient.Builder sHttpClient = new OkHttpClient.Builder();
 
     private  retrofit2.Retrofit.Builder sBuilder =
@@ -28,9 +32,9 @@ public class Controller {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 
     public Api createService() {
-//        sHttpClient.addInterceptor(headerInterceptor);
+      sHttpClient.addInterceptor(headerInterceptor);
         retrofit2.Retrofit retrofit = sBuilder
-//                .client(sHttpClient.build())
+             .client(sHttpClient.build())
                 .build();
         return  retrofit.create(Api.class);
     }

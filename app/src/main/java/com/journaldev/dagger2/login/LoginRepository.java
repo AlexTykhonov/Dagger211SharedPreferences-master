@@ -1,12 +1,11 @@
 package com.journaldev.dagger2.login;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Toast;
 
-import com.journaldev.dagger2.SecondActivity;
+import com.journaldev.dagger2.moto.MotoActivity;
 import com.journaldev.dagger2.model.Login;
 import com.journaldev.dagger2.network.Api;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -41,7 +40,7 @@ public class LoginRepository {
     }
 
     void newActivity(View view) {
-    Intent intent = new Intent(view.getContext(), SecondActivity.class);
+    Intent intent = new Intent(view.getContext(), MotoActivity.class);
     view.getContext().startActivity(intent);
     }
 

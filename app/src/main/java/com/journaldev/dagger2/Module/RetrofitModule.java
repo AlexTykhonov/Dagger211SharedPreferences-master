@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.journaldev.dagger2.login.LoginRepository;
 import com.journaldev.dagger2.network.Api;
 import com.journaldev.dagger2.network.Controller;
+import com.journaldev.dagger2.network.HeaderInterceptor;
 
 import javax.inject.Singleton;
 
@@ -14,10 +15,11 @@ import dagger.Provides;
 
 @Module
 public class RetrofitModule {
+
     @Singleton
     @Provides
-    public Controller createController () {
-        return new Controller();
+    public Controller createController (HeaderInterceptor headerInterceptor) {
+        return new Controller(headerInterceptor);
     }
 
     @Singleton
@@ -33,10 +35,6 @@ public class RetrofitModule {
     LoginRepository getRepository(Api apiCallInterface, SharedPreferences sharedPreferences) {
         return new LoginRepository(apiCallInterface, sharedPreferences);
     }
-//
-//    @Provides
-//    @Singleton
-//    ViewModelProvider.Factory getViewModelFactory(LoginRepository myRepository) {
-//        return new ViewModelFactory(myRepository);
-//    }
+
+
 }
