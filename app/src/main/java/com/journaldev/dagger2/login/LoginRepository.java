@@ -5,9 +5,14 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Toast;
 
+import com.journaldev.dagger2.model.Moto;
 import com.journaldev.dagger2.moto.MotoActivity;
 import com.journaldev.dagger2.model.Login;
 import com.journaldev.dagger2.network.Api;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -38,6 +43,8 @@ public class LoginRepository {
                     Toast.makeText(view.getContext(), "Wrong Credentials!", Toast.LENGTH_LONG).show();
                 });
     }
+
+
 
     void newActivity(View view) {
     Intent intent = new Intent(view.getContext(), MotoActivity.class);

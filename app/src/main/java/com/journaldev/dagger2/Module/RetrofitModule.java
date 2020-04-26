@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.content.SharedPreferences;
 
 import com.journaldev.dagger2.login.LoginRepository;
+import com.journaldev.dagger2.moto.MotoRepository;
 import com.journaldev.dagger2.network.Api;
 import com.journaldev.dagger2.network.Controller;
 import com.journaldev.dagger2.network.HeaderInterceptor;
@@ -36,5 +37,10 @@ public class RetrofitModule {
         return new LoginRepository(apiCallInterface, sharedPreferences);
     }
 
+    @Provides
+    @Singleton
+    MotoRepository getMotoRepository (Api api) {
+        return new MotoRepository(api);
+    }
 
 }

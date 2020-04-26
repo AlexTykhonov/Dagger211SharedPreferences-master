@@ -10,6 +10,10 @@ import com.journaldev.dagger2.databinding.ActivitySecondBinding;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjection;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 public class MotoActivity extends AppCompatActivity {
 
     @Inject
@@ -17,10 +21,18 @@ public class MotoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
+
         super.onCreate(savedInstanceState);
         ActivitySecondBinding activitySecondBinding = DataBindingUtil.setContentView(this, R.layout.activity_second);
         activitySecondBinding.setMotoViewModel(motoViewModel);
+
+        System.out.println(" ooooooo MOTOREPOSITORY ->  "+motoViewModel.getListObservable());
+
+        motoViewModel.getListObservable().subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(m-> System.out.println(m));
     }
+
 }
 
-// подключить интерсептор в ретрофит.

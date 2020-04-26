@@ -4,16 +4,28 @@ package com.journaldev.dagger2.moto;
 import android.arch.lifecycle.ViewModel;
 
 import com.journaldev.dagger2.login.LoginRepository;
+import com.journaldev.dagger2.model.Moto;
+import com.journaldev.dagger2.network.Api;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+
 public class MotoViewModel extends ViewModel {
 
-    LoginRepository loginRepository;
+    Observable<List<Moto>> listObservable;
+    MotoRepository motoRepository;
 
     @Inject
-    public MotoViewModel(LoginRepository loginRepository) {
-    this.loginRepository = loginRepository;
+    public MotoViewModel(MotoRepository motoRepository) {
+    this.motoRepository = motoRepository;
+    }
+
+    public  Observable<List<Moto>> getListObservable () {
+
+        return motoRepository.apiMoto();
     }
 
 }
